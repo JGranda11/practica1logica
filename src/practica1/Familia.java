@@ -1,6 +1,7 @@
 package practica1;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Familia {
   private Persona [] family= new Persona[4];
@@ -21,7 +22,6 @@ public class Familia {
   }
 
   public void mostrarFamilia() {
-    System.out.println("Familia ");
     for (int i = 0; i < 4; i++)
       if (family[i] == null){
         System.out.println("Está muerto");
@@ -30,4 +30,6 @@ public class Familia {
       }
 
   }
+
+
 }

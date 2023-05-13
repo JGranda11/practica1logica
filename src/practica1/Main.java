@@ -42,13 +42,16 @@ public class Main {
       }
     }
 
-    nave.mostrarFamilias();
+    nave.mostrarNave();
 
     System.out.println("\n-----------------------------------------\n");
 
-    nave.secuestrasMenoresDiagonales();
+    int[] edades = nave.vectorEdades();
+    for (int i = 0; i < 10; i++) {
+      System.out.println(edades[i]);
+    }
 
-    nave.mostrarFamilias();//1, 7, 13, 18, 25
+    nave.mostrarNave();//1, 7, 13, 18, 25
 
 
 
