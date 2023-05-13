@@ -23,6 +23,11 @@ public class Familia {
   public void mostrarFamilia() {
     System.out.println("Familia ");
     for (int i = 0; i < 4; i++)
-      System.out.println(family[i].toString());
+      if (family[i] == null){
+        System.out.println("Está muerto");
+      }else{
+        System.out.println(family[i].toString());
+      }
+
   }
 }

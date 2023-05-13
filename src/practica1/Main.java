@@ -27,11 +27,13 @@ public class Main {
       edad = rand.nextInt(81);
       personas[i] = new Persona(nombre, genero, edad);
     }
+
     int j = 0;
     for (int i = 0; i<25; i++){
         familias[i] = new Familia(personas[j], personas[j+1], personas[j+2], personas[j+3]);
         j=j+4;
     }
+
     j = 0;
     for (int i = 0; i < 5; i++){
       for (int k = 0; k < 5; k++){
@@ -41,6 +43,15 @@ public class Main {
     }
 
     nave.mostrarFamilias();
+
+    System.out.println("\n-----------------------------------------\n");
+
+    nave.secuestrasMenoresDiagonales();
+
+    nave.mostrarFamilias();//1, 7, 13, 18, 25
+
+
+
   }
 }
 
