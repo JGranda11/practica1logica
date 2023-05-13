@@ -3,15 +3,18 @@ package practica1;
 import java.util.Arrays;
 
 public class Familia {
-  private Persona [] family= new Persona[4];
+  private Persona [] family;
 
-  public Familia(Persona persona1,Persona persona2,Persona persona3,Persona persona4 ) {
-    family[0]=persona1;
-    family[1]=persona2;
-    family[2]=persona3;
-    family[3]=persona4;
+  public Familia (Persona[] arreglo){
+    family = new Persona[4];
+    family = arreglo;
   }
 
+  public void agregarPersonas(Persona persona){
+    for (int i = 0; i < 4; i++) {
+      family[i] = persona;
+    }
+  }
   public Persona[] getFamily() {
     return family;
   }

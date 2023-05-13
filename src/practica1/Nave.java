@@ -5,10 +5,12 @@ import java.util.Arrays;
 public class Nave {
   private Familia[][] nave = new Familia[5][5];
 
-  public Nave(Familia familia) {
-    for (int i = 0; i < 5; i++) {
-      for (int j = 0; j <5; j++) {
-        nave[i][j] = familia;
+  public Nave(Familia[] familia) {
+    int contador = 0;
+    for (int i = 0; i < 2; i++) {
+      for (int j = 0; j < 2; j++) {
+        nave[i][j]= familia[contador];
+        contador++;
       }
     }
   }
