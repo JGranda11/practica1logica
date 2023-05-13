@@ -1,8 +1,5 @@
 package practica1;
 
-import java.util.Arrays;
-import java.util.Random;
-
 public class Familia {
   private Persona [] family= new Persona[4];
 
@@ -23,8 +20,8 @@ public class Familia {
 
   public void mostrarFamilia() {
     for (int i = 0; i < 4; i++)
-      if (family[i] == null){
-        System.out.println("Está muerto");
+      if (family[i].getName().equals("")){
+        System.out.print("");
       }else{
         System.out.println(family[i].toString());
       }

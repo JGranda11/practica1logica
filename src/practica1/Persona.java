@@ -12,7 +12,9 @@ public class Persona {
   }
 
   public Persona() {
-
+    name = "";
+    gender = "";
+    edad = -1;
   }
 
   public String getName() {
