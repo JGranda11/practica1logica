@@ -42,14 +42,9 @@ public class Main {
       }
     }
 
-    nave.mostrarNave();
+    nave.colisionarConAsteroide();
 
     System.out.println("\n-----------------------------------------\n");
-
-    int[] edades = nave.vectorEdades();
-    for (int i = 0; i < 10; i++) {
-      System.out.println(edades[i]);
-    }
 
     nave.mostrarNave();//1, 7, 13, 18, 25
 
