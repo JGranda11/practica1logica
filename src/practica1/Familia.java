@@ -20,10 +20,9 @@ public class Familia {
     this.family = family;
   }
 
-  @Override
-  public String toString() {
-    return "Familia{" +
-            "family=" + Arrays.toString(family) +
-            '}';
+  public void mostrarFamilia() {
+    System.out.println("Familia ");
+    for (int i = 0; i < 4; i++)
+      System.out.println(family[i].toString());
   }
 }
