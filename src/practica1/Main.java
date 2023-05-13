@@ -42,14 +42,17 @@ public class Main {
       }
     }
 
-    nave.colisionarConAsteroide();
-
     System.out.println("\n-----------------------------------------\n");
 
-    nave.mostrarNave();//1, 7, 13, 18, 25
 
 
+    Persona[] viejos = nave.vectorViejos();
 
+    for (int i = 0; i < 10; i++) {
+      System.out.println(viejos[i].toString());
+    }
+
+    nave.mostrarNave();
   }
 }
 

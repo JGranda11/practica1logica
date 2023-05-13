@@ -140,9 +140,11 @@ public class Nave {
     }
   }
 
-  public int[] vectorEdades() {
-    int[] edades = new int[10];
+  public Persona[] vectorViejos() {
+    Persona[] personas = new Persona[10];
     int edadActual;
+    int[] edades = new int[10];
+    Persona viejoActual = new Persona();
     for (int i = 0; i < 10; i++) {
       edades[i] = 0;
     }
@@ -154,8 +156,10 @@ public class Nave {
             if (edadActual > edades[l]) {
               for (int m = edades.length - 1; m > l; m--) {
                 edades[m] = edades[m - 1];
+                personas[m] = personas[m - 1];
               }
               edades[l] = edadActual;
+              personas[l] = nave[i][j].getFamily()[k];
               break;
             }
           }
@@ -163,7 +167,19 @@ public class Nave {
       }
     }
 
-    return edades;
+    for (int i = 0; i < 5; i++) {
+      for (int j = 0; j < 5; j++) {
+        for (int k = 0; k < 4; k++) {
+          for (int l = 0; l < 10; l++) {
+            if (personas[l] == nave[i][j].getFamily()[k]){
+              nave[i][j].getFamily()[k] = null;
+            }
+          }
+        }
+
+      }
+    }
+    return personas;
   }
 
   public void colisionarConAsteroide() {

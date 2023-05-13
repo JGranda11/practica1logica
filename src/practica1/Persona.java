@@ -11,6 +11,10 @@ public class Persona {
     this.edad = edad;
   }
 
+  public Persona() {
+
+  }
+
   public String getName() {
     return name;
   }
