@@ -132,6 +132,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("Una tormenta solar ha alcanzado la nave. Han muerto todos los del la primera fila");
     } else {
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -146,6 +147,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("Una tormenta solar ha alcanzado la nave. Han muerto todos los del la última fila");
     }
   }
 
@@ -166,6 +168,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("Una tormenta solar ha alcanzado la nave. Han muerto todos los del la primera columna");
     } else {
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -179,10 +182,11 @@ public class Nave {
         }
       }
     }
+    System.out.println("Una tormenta solar ha alcanzado la nave. Han muerto todos los del la última columna");
   }
 
   //Evento 3 (Fuga de aire)
-  public Persona[] vectorViejos() {
+  public Persona[] fugaDeAire() {
     Persona[] personas = new Persona[10];
     int edadActual;
     int[] edades = new int[10];
@@ -225,6 +229,7 @@ public class Nave {
 
       }
     }
+    System.out.println("Hay una fuga de aire en la nave. Se expulsan las 10 personas más viejas para ahorrar oxígeno");
     return personas;
   }
 
@@ -247,6 +252,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("La nave colisionó con un asteroide. Impactó a todo el cuadrante 1. No queda nadie allí");
     } else if (cuadrante == 1) {
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -261,6 +267,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("La nave colisionó con un asteroide. Impactó a todo el cuadrante 2. No queda nadie allí");
     } else if (cuadrante == 2) {
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -274,7 +281,8 @@ public class Nave {
             nave[i][j] = new Familia(new Persona(), new Persona(), new Persona(), new Persona());
           }
         }
-      }
+      }System.out.println("La nave colisionó con un asteroide. Impactó a todo el cuadrante 3. No queda nadie allí");
+
     } else if (cuadrante == 3) {
       for (int i = 0; i < 5; i++) {
         for (int j = 0; j < 5; j++) {
@@ -289,6 +297,7 @@ public class Nave {
           }
         }
       }
+      System.out.println("La nave colisionó con un asteroide. Impactó a todo el cuadrante 4. No queda nadie allí");
     }
   }
 

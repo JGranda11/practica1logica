@@ -58,12 +58,11 @@ public class PersonaMuerta {
 
     @Override
     public String toString() {
-        return "PersonaMuerta{" +
-                "nombre='" + nombre + '\'' +
-                ", edad=" + edad +
-                ", genero='" + genero + '\'' +
-                ", causaDeMuerte='" + causaDeMuerte + '\'' +
-                ", ruta='" + ruta + '\'' +
-                '}';
+        return "Persona fallecida : " +
+                "Nombre=" + nombre +
+                ", Edad=" + edad +
+                ", Genero=" + genero +
+                ", Causa de muerte=" + causaDeMuerte +
+                ", Ruta=" + ruta + ".";
     }
 }
