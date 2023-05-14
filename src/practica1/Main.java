@@ -46,22 +46,22 @@ public class Main {
       }
     }
 
-    System.out.println("\n-----------------------------------------\n");
-
-    nave.colisionarConAsteroide("Saliendo de Gamma");
-    nave.colisionarConAsteroide("Entrando a Sigma");
-    nave.secuestrarMujeresDiagonalPpal();
-    nave.secuestrasMenoresDiagonales();
-    nave.vectorViejos();
+    System.out.println("\n-----Resumen inicial de la nave-----\n");
 
     nave.mostrarNave();
 
+    System.out.println("Salida de la nave del planeta Gama(planeta origen)");
+    System.out.println("En el anillo de Gama, están asociados: Evento 1, Evento 4, Evento 7");
+
+
+    System.out.println("\n-----Resumen final personas fallecidas-----\n");
     int i = 0;
     personasMuertas=nave.getPersonasFallecidas();
     for ( PersonaMuerta p : personasMuertas) {
       System.out.println(i + p.toString());
       i++;
     }
+
   }
 }
 

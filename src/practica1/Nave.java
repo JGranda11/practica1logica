@@ -44,6 +44,7 @@ public class Nave {
     }
   }
 
+  //Evento #5 (Ataque de piratas)
   public void secuestrarMujeresDiagonalPpal() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
@@ -62,6 +63,7 @@ public class Nave {
     }
   }
 
+  //Metodo no implementado - Evento #6
   public void secuestrarHombresDiagonalSecundaria() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
@@ -80,6 +82,7 @@ public class Nave {
     }
   }
 
+  //Evento #7 (Esclavistas)
   public void secuestrasMenoresDiagonales() {
     for (int i = 0; i < 5; i++) {
       for (int j = 0; j < 5; j++) {
@@ -98,6 +101,7 @@ public class Nave {
     }
   }
 
+  //Evento #4 (tormenta solar)
   public void tormentaSolar() {
     Random rand = new Random();
 
@@ -109,6 +113,7 @@ public class Nave {
     }
   }
 
+  //Metodo implementado en el evento #4
   public void tormentaSolarFila() {
     Random rand = new Random();
 
@@ -144,6 +149,7 @@ public class Nave {
     }
   }
 
+  //Metodo implementado en el evento #4
   public void tormentaSolarColumna() {
     Random rand = new Random();
 
@@ -175,6 +181,7 @@ public class Nave {
     }
   }
 
+  //Evento 3 (Fuga de aire)
   public Persona[] vectorViejos() {
     Persona[] personas = new Persona[10];
     int edadActual;
@@ -221,6 +228,7 @@ public class Nave {
     return personas;
   }
 
+  //Evento #1 (Colisión con asteroide)
   public void colisionarConAsteroide(String ruta) {
     Random rand = new Random();
 
