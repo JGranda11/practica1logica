@@ -1,36 +1,38 @@
+//Creamos esta clase para simbolizar a cada tripulante de la nave, con los atributos necesarios para el ejercicio
+
 package practica1;
 
 public class Persona {
-  private String name;
-  private String gender;
+  private String nombre;
+  private String genero;
   private int edad;
 
   public Persona(String name, String gender, int edad) {
-    this.name = name;
-    this.gender = gender;
+    this.nombre = name;
+    this.genero = gender;
     this.edad = edad;
   }
 
   public Persona() {
-    name = "";
-    gender = "";
+    nombre = "";
+    genero = "";
     edad = -1;
   }
 
   public String getName() {
-    return name;
+    return nombre;
   }
 
   public void setName(String name) {
-    this.name = name;
+    this.nombre = name;
   }
 
   public String getGender() {
-    return gender;
+    return genero;
   }
 
   public void setGender(String gender) {
-    this.gender = gender;
+    this.genero = gender;
   }
 
   public int getEdad() {
@@ -44,8 +46,8 @@ public class Persona {
   @Override
   public String toString() {
     return "Persona{" +
-            "name='" + name + '\'' +
-            ", gender='" + gender + '\'' +
+            "name='" + nombre + '\'' +
+            ", gender='" + genero + '\'' +
             ", edad=" + edad +
             '}';
   }
