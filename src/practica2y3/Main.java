@@ -1,8 +1,12 @@
-package practica1;
+package practica2y3;
 
-import practica2y3.Rover;
+import practica1.Familia;
+import practica1.Nave;
+import practica1.Persona;
+import practica1.PersonaMuerta;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -138,7 +142,87 @@ public class Main {
 
     System.out.println("\n\n-----Resumen final de personas que quedan en la nave-----");
     nave.mostrarNave();
+
+    List<Lado> lados = Arrays.asList(
+            new Lado(1, 2, 1), new Lado(1, 8, 2), new Lado(2, 3, 4),
+            new Lado(2, 4, 1), new Lado(2, 7, 3), new Lado(3, 5, 3),
+            new Lado(3, 6, 3), new Lado(4, 9, 3), new Lado(5, 4, 6),
+            new Lado(5, 6, 2), new Lado(7, 8, 1), new Lado(9, 6, 2),
+            new Lado(9, 10, 5));
+
+    Grafo grafo = new Grafo(lados);
+
+    Grafo.printGraph(grafo);
+
+    personasMuertas.clear();
+    Rover rover = new Rover();
+
+    for (int k = 0; k < 5; k++) {
+      for (int l = 0; l < 5; l++) {
+        if((nave.getNave()[k][l].familiaViva()) && (rover.getCabinas().size()<9)){
+          rover.agregarFamilia(nave.getNave()[k][l]);
+        }
+      }
+    }
+
+    int nodoAViajar = 0;
+    int cantidadAdyacentes = 0;
+    int nodoActual = rand.nextInt(10)+1;
+
+    System.out.println("El rover ha aterrizado en el nodo " + nodoActual);
+
+    int cantidadDePersonas = 0;
+
+    for (Familia familia : rover.getCabinas()) {
+      cantidadDePersonas += familia.numeroDePersonasVivas();
+    }
+
+    System.out.println("cantidad de personas " + cantidadDePersonas);
+    int peso;
+    int consumoDeOxígeno;
+    //Instrucciones para realizar el recorrido
+    while((nodoActual != 8) && (nodoActual != 10) && (nodoActual != 6)){
+
+      cantidadAdyacentes = grafo.getAdjList().get(nodoActual).size();
+      nodoAViajar = rand.nextInt(cantidadAdyacentes);
+
+      peso = grafo.getAdjList().get(nodoActual).get(nodoAViajar).peso;
+      nodoActual = grafo.getAdjList().get(nodoActual).get(nodoAViajar).valor;
+
+      System.out.println("El rover ha viajado al nodo " + nodoActual);
+
+
+
+      consumoDeOxígeno = peso * cantidadDePersonas;
+
+      rover.setUnidadesOxigeno(rover.getUnidadesOxigeno()-consumoDeOxígeno);
+
+      if(rover.getUnidadesOxigeno()<10){
+        rover.tirarFamiliaABorda(nodoActual);
+      }
+
+      System.out.println("El consumo de oxígeno en este trayecto fue: " + consumoDeOxígeno);
+    }
+
+    System.out.println(rover.getUnidadesOxigeno());
+
+    if((nodoActual == 8) || (nodoActual == 10) ){
+      System.out.println("\nEl rover quedó atrapado en el valle del nodo " + nodoActual);
+    }else{
+      System.out.println("El rover llegó a la base...");
+    }
+
+    cantidadDePersonas = 0;
+
+    for (Familia familia : rover.getCabinas()) {
+      cantidadDePersonas += familia.numeroDePersonasVivas();
+    }
+
+    System.out.println("Cantidad de personas final " + cantidadDePersonas);
+
+    for (Familia f: rover.getFamiliasLanzadas()
+         ) {
+      f.mostrarFamiliaLanzada();
+    }
   }
 }
-
-
