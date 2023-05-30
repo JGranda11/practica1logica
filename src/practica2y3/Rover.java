@@ -15,7 +15,7 @@ public class Rover {
     List<Familia> familiasLanzadas = new ArrayList<>();
     public Rover() {
         this.numeroDePersonas = 0;
-        this.unidadesOxigeno = 80;
+        this.unidadesOxigeno = 300;
         this.unidadesReserva = 20;
     }
 

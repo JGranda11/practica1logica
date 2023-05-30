@@ -181,7 +181,7 @@ public class Main {
     int peso;
     int consumoDeOxígeno;
     //Instrucciones para realizar el recorrido
-    while((nodoActual != 8) && (nodoActual != 10) && (nodoActual != 6)){
+    while((nodoActual != 8) && (nodoActual != 10) && (nodoActual != 6) && (rover.getUnidadesReserva() != 0)){
 
       cantidadAdyacentes = grafo.getAdjList().get(nodoActual).size();
       nodoAViajar = rand.nextInt(cantidadAdyacentes);
@@ -189,27 +189,67 @@ public class Main {
       peso = grafo.getAdjList().get(nodoActual).get(nodoAViajar).peso;
       nodoActual = grafo.getAdjList().get(nodoActual).get(nodoAViajar).valor;
 
-      System.out.println("El rover ha viajado al nodo " + nodoActual);
+      System.out.println("El rover está viajando al nodo " + nodoActual);
 
 
 
       consumoDeOxígeno = peso * cantidadDePersonas;
+      System.out.println("Unidades de oxígeno en rover: " + rover.getUnidadesOxigeno());
+      System.out.println("Unidades de reserva en rover: " + rover.getUnidadesReserva());
+      System.out.println("El consumo de oxígeno en este trayecto es: " + consumoDeOxígeno);
 
-      rover.setUnidadesOxigeno(rover.getUnidadesOxigeno()-consumoDeOxígeno);
-
-      if(rover.getUnidadesOxigeno()<10){
+      if((rover.getUnidadesOxigeno()-consumoDeOxígeno)<0){
+        rover.setUnidadesReserva(rover.getUnidadesOxigeno()-consumoDeOxígeno + rover.getUnidadesReserva());
+        rover.setUnidadesOxigeno(0);
+        System.out.println("¡Han tirado a la primera familia por la borda!");
         rover.tirarFamiliaABorda(nodoActual);
+        if(rover.getUnidadesReserva() < 0){
+          rover.setUnidadesReserva(0);
+          System.out.println("El rover comienza su viaje al nodo " + nodoActual + "...");
+          System.out.println("El rover no ha llegado al nodo " + nodoActual + "...");
+        }else{
+          System.out.println("El rover ha llegado al nodo "+nodoActual +" con "+rover.getUnidadesOxigeno() + " unidades de oxigeno y " + rover.getUnidadesReserva() + " unidades de reserva");
+        }
+
+      }else{
+        rover.setUnidadesOxigeno(rover.getUnidadesOxigeno()-consumoDeOxígeno);
       }
 
-      System.out.println("El consumo de oxígeno en este trayecto fue: " + consumoDeOxígeno);
     }
 
-    System.out.println(rover.getUnidadesOxigeno());
+    System.out.println("\n\n***********Estado final del Rover*********\n");
 
-    if((nodoActual == 8) || (nodoActual == 10) ){
+
+
+    //Estado final del rover
+
+    int sizeCabinas;
+    if((nodoActual == 8) || (nodoActual == 10) && ((rover.getUnidadesReserva() != 0) || (rover.getUnidadesOxigeno()!= 0)) ){
       System.out.println("\nEl rover quedó atrapado en el valle del nodo " + nodoActual);
+       sizeCabinas = rover.getCabinas().size();
+      for (int k = 0; k < sizeCabinas; k++) {
+        rover.tirarFamiliaABorda(nodoActual);
+      }
+    }else if((nodoActual == 8) || (nodoActual == 10) && ((rover.getUnidadesReserva() == 0)) ){
+      System.out.println("El rover se quedó sin oxígeno momentos antes de quedar atrapado en el valle del nodo " + nodoActual);sizeCabinas = rover.getCabinas().size();
+      sizeCabinas = rover.getCabinas().size();
+      for (int k = 0; k < sizeCabinas; k++) {
+        rover.tirarFamiliaABorda(nodoActual);
+      }
+    } else if ((nodoActual == 6) && (rover.getUnidadesReserva()!=0)) {
+      System.out.println("El rover llegó a la base");
+    }else if(nodoActual == 6){
+      System.out.println("El rover se quedó sin oxígeno momentos antes de llegar a la base");
+      sizeCabinas = rover.getCabinas().size();
+      for (int k = 0; k < sizeCabinas; k++) {
+        rover.tirarFamiliaABorda(nodoActual);
+      }
     }else{
-      System.out.println("El rover llegó a la base...");
+      System.out.println("El rover se quedó sin oxígeno momentos antes de llegar al nodo " + nodoActual);
+      sizeCabinas = rover.getCabinas().size();
+      for (int k = 0; k < sizeCabinas; k++) {
+        rover.tirarFamiliaABorda(nodoActual);
+      }
     }
 
     cantidadDePersonas = 0;
