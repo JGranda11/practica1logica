@@ -224,5 +224,188 @@ public class Main {
          ) {
       f.mostrarFamiliaLanzada();
     }
+
+    //Implementación árbol
+
+    List<LadoArbol> ladosArbol = Arrays.asList(new LadoArbol(1, 2), new LadoArbol(2, 5),
+            new LadoArbol(5, 18), new LadoArbol(2, 6), new LadoArbol(6, 11),
+            new LadoArbol(2, 7), new LadoArbol(7, 17), new LadoArbol(1, 3),
+            new LadoArbol(3, 8), new LadoArbol(8, 12), new LadoArbol(8, 13),
+            new LadoArbol(1, 4), new LadoArbol(4, 9), new LadoArbol(9, 16),
+            new LadoArbol(4, 10), new LadoArbol(10, 14));
+
+    Arbol arbol = new Arbol(ladosArbol);
+
+    Arbol.mostrarArbol(arbol);
+
+    float[] promedios = new float[7];
+
+    float acumuladoFactores = 0;
+    boolean randomArbol = rand.nextBoolean();
+    for (int k = 0; k < 5; k++) {
+      nodoActual = 1;
+      int contadorMuertos = 0;
+
+      while(nodoActual != 18){
+        nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+        for (Familia f: rover.getCabinas()
+             ) {
+          for (Persona p : f.getFamily()
+               ) {
+            if((p.getEdad() % nodoActual == 0) && (nodoActual != 1)){
+              randomArbol = rand.nextBoolean();
+              if(randomArbol){
+                contadorMuertos++;
+              }
+            }
+          }
+        }
+        System.out.println("Contador muertos. " + contadorMuertos);
+        nodoActual = nodoAViajar;
+        double indice = 0.0;
+        if(contadorMuertos!=0){
+          indice = 18/4;
+        }
+
+        System.out.println("Indice de muertos: " + indice);
+      }
+      /*acumuladoFactores+=(18/contadorMuertos);
+      System.out.println(acumuladoFactores);*/
+    }
+
+
+
+    System.out.println("Ruta 2");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 3");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 4");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 4");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 5");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 6");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
+
+    System.out.println("Ruta 7");
+
+    for (int k = 0; k < 1; k++) {
+      nodoActual = 1;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+
+      nodoActual = nodoAViajar;
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
+      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
+    }
   }
 }
