@@ -242,9 +242,9 @@ public class Main {
 
     float acumuladoFactores = 0;
     boolean randomArbol = rand.nextBoolean();
-    for (int k = 0; k < 5; k++) {
+    for (int k = 0; k < 100; k++) {
       nodoActual = 1;
-      int contadorMuertos = 0;
+      float contadorMuertos = 0.0F;
 
       while(nodoActual != 18){
         nodoAViajar = arbol.adjList.get(nodoActual).get(0);
@@ -260,20 +260,20 @@ public class Main {
             }
           }
         }
-        System.out.println("Contador muertos. " + contadorMuertos);
+        //System.out.println("Contador muertos. " + contadorMuertos);
         nodoActual = nodoAViajar;
         double indice = 0.0;
         if(contadorMuertos!=0){
-          indice = 18/4;
+          indice = 18.0/contadorMuertos;
         }
 
-        System.out.println("Indice de muertos: " + indice);
+        //System.out.println("Indice de muertos: " + indice);
+        acumuladoFactores+=indice;
       }
-      /*acumuladoFactores+=(18/contadorMuertos);
-      System.out.println(acumuladoFactores);*/
     }
-
-
+    System.out.println("Indice de ganancia promedio para esta ruta: "+(acumuladoFactores)/100);
+    promedios[0] = (acumuladoFactores)/100;
+    System.out.println(promedios[0]);
 
     System.out.println("Ruta 2");
 
