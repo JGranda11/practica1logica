@@ -238,174 +238,108 @@ public class Main {
 
     Arbol.mostrarArbol(arbol);
 
+    Ruta ruta1 = new Ruta(0, 0, 0);
+    Ruta ruta2 = new Ruta(0, 1, 0);
+    Ruta ruta3 = new Ruta(0, 2, 0);
+    Ruta ruta4 = new Ruta(1, 0, 0);
+    Ruta ruta5 = new Ruta(1, 0, 1);
+    Ruta ruta6 = new Ruta(2, 0, 0);
+    Ruta ruta7 = new Ruta(2, 1, 0);
+
+
+
     float[] promedios = new float[7];
 
-    float acumuladoFactores = 0;
+    float promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta1, 18, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 1 es: " + promedioActual +"\n");
+    promedios[0] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta2, 11, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 2 es: " + promedioActual +"\n");
+    promedios[1] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta3, 17, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 3 es: " + promedioActual +"\n");
+    promedios[2] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta4, 12, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 4 es: " + promedioActual +"\n");
+    promedios[3] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta5, 13, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 5 es: " + promedioActual +"\n");
+    promedios[4] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta6, 16, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 6 es: " + promedioActual +"\n");
+    promedios[5] = promedioActual;
+
+    promedioActual = calcularPromedioRuta(ruta7, 14, arbol, rover);
+    System.out.println("El promedio de factores de ganancia para la ruta 7 es: " + promedioActual +"\n");
+    promedios[6] = promedioActual;
+
+    float mayorPromedio = 0;
+    int ruta = 0;
+
+    for (int k = 0; k < promedios.length; k++) {
+      if(promedios[k] > mayorPromedio){
+        mayorPromedio = promedios[k];
+        ruta = k+1;
+      }
+    }
+
+    System.out.println("El mayor promedio de los índices de ganancia para todas las rutas es el de la ruta "+ ruta + " con un promedio de factor de ganancia de "+mayorPromedio);
+  }
+
+  static float calcularPromedioRuta(Ruta ruta, float factorGanancia, Arbol arbol, Rover rover) {
+    float acumuladoFactores = 0.0f;
+    int nodoActual;
+    int nodoAViajar;
+    float promedio = 0.0f;
+    Random rand = new Random();
     boolean randomArbol = rand.nextBoolean();
+
     for (int k = 0; k < 100; k++) {
       nodoActual = 1;
       float contadorMuertos = 0.0F;
 
-      while(nodoActual != 18){
-        nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-        for (Familia f: rover.getCabinas()
-             ) {
-          for (Persona p : f.getFamily()
-               ) {
-            if((p.getEdad() % nodoActual == 0) && (nodoActual != 1)){
-              randomArbol = rand.nextBoolean();
-              if(randomArbol){
-                contadorMuertos++;
-              }
-            }
+      nodoAViajar = arbol.adjList.get(nodoActual).get(ruta.getPaso1());
+      nodoActual = nodoAViajar;
+
+      contadorMuertos += calcularMuertosPorNodo(nodoActual, rover);
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(ruta.getPaso2());
+      nodoActual = nodoAViajar;
+
+      contadorMuertos += calcularMuertosPorNodo(nodoActual, rover);
+
+      nodoAViajar = arbol.adjList.get(nodoActual).get(ruta.getPaso3());
+      nodoActual = nodoAViajar;
+
+      acumuladoFactores += (factorGanancia/contadorMuertos);
+    }
+
+    promedio = acumuladoFactores/100;
+    return promedio;
+  }
+  static int calcularMuertosPorNodo(int nodoActual, Rover rover){
+    int contadorMuertos = 0;
+    Random rand = new Random();
+    boolean randomArbol;
+    for (Familia f : rover.getCabinas()
+    ) {
+      for (Persona p : f.getFamily()
+      ) {
+        if ((p.getEdad() % nodoActual == 0)) {
+          randomArbol = rand.nextBoolean();
+          if (randomArbol) {
+            contadorMuertos++;
           }
         }
-        //System.out.println("Contador muertos. " + contadorMuertos);
-        nodoActual = nodoAViajar;
-        double indice = 0.0;
-        if(contadorMuertos!=0){
-          indice = 18.0/contadorMuertos;
-        }
-
-        //System.out.println("Indice de muertos: " + indice);
-        acumuladoFactores+=indice;
       }
     }
-    System.out.println("Indice de ganancia promedio para esta ruta: "+(acumuladoFactores)/100);
-    promedios[0] = (acumuladoFactores)/100;
-    System.out.println(promedios[0]);
-
-    System.out.println("Ruta 2");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 3");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 4");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 4");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 5");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 6");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
-
-    System.out.println("Ruta 7");
-
-    for (int k = 0; k < 1; k++) {
-      nodoActual = 1;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(2);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(1);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-
-      nodoActual = nodoAViajar;
-
-      nodoAViajar = arbol.adjList.get(nodoActual).get(0);
-      System.out.println("El rover ha viajado al nodo " + nodoAViajar);
-    }
+    return contadorMuertos;
   }
 }
