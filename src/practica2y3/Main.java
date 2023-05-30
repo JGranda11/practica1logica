@@ -318,6 +318,9 @@ public class Main {
       nodoAViajar = arbol.adjList.get(nodoActual).get(ruta.getPaso3());
       nodoActual = nodoAViajar;
 
+      if(contadorMuertos == 0){
+        contadorMuertos++;
+      }
       acumuladoFactores += (factorGanancia/contadorMuertos);
     }
 
