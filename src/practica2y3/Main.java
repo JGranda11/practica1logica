@@ -5,6 +5,7 @@ import practica1.Nave;
 import practica1.Persona;
 import practica1.PersonaMuerta;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -169,6 +170,7 @@ public class Main {
     int cantidadAdyacentes = 0;
     int nodoActual = rand.nextInt(10)+1;
 
+    System.out.println("\n***********EL ROVER ESTÁ ATERRIZANDO EN EL PLANETA***********\n");
     System.out.println("El rover ha aterrizado en el nodo " + nodoActual);
 
     int cantidadDePersonas = 0;
@@ -177,7 +179,7 @@ public class Main {
       cantidadDePersonas += familia.numeroDePersonasVivas();
     }
 
-    System.out.println("cantidad de personas " + cantidadDePersonas);
+    System.out.println("Cantidad de personas en el rover: " + cantidadDePersonas);
     int peso;
     int consumoDeOxígeno;
     //Instrucciones para realizar el recorrido
@@ -189,6 +191,7 @@ public class Main {
       peso = grafo.getAdjList().get(nodoActual).get(nodoAViajar).peso;
       nodoActual = grafo.getAdjList().get(nodoActual).get(nodoAViajar).valor;
 
+      System.out.println("\n*************************************************************\n");
       System.out.println("El rover está viajando al nodo " + nodoActual);
 
 
@@ -196,12 +199,12 @@ public class Main {
       consumoDeOxígeno = peso * cantidadDePersonas;
       System.out.println("Unidades de oxígeno en rover: " + rover.getUnidadesOxigeno());
       System.out.println("Unidades de reserva en rover: " + rover.getUnidadesReserva());
-      System.out.println("El consumo de oxígeno en este trayecto es: " + consumoDeOxígeno);
+      System.out.println("El consumo de oxígeno en este trayecto será: " + consumoDeOxígeno);
 
       if((rover.getUnidadesOxigeno()-consumoDeOxígeno)<0){
         rover.setUnidadesReserva(rover.getUnidadesOxigeno()-consumoDeOxígeno + rover.getUnidadesReserva());
         rover.setUnidadesOxigeno(0);
-        System.out.println("¡Han tirado a la primera familia por la borda!");
+        System.out.println("\n¡Han tirado a la primera familia por la borda!\n");
         rover.tirarFamiliaABorda(nodoActual);
         if(rover.getUnidadesReserva() < 0){
           rover.setUnidadesReserva(0);
@@ -217,7 +220,7 @@ public class Main {
 
     }
 
-    System.out.println("\n\n***********Estado final del Rover*********\n");
+    System.out.println("\n\n******************ESTADO FINAL DEL ROVER********************\n");
 
 
 
@@ -259,78 +262,89 @@ public class Main {
     }
 
     System.out.println("Cantidad de personas final " + cantidadDePersonas);
+    System.out.println("La cantidad de unidades de oxígeno con las que llegaron es: " + rover.getUnidadesOxigeno());
+    System.out.println("La cantidad de unidades de oxígeno de reserva con las que llegaron es: " + rover.getUnidadesReserva());
 
     for (Familia f: rover.getFamiliasLanzadas()
          ) {
       f.mostrarFamiliaLanzada();
     }
 
-    //Implementación árbol
+    if (cantidadDePersonas != 0) {
+      //Implementación árbol
 
-    List<LadoArbol> ladosArbol = Arrays.asList(new LadoArbol(1, 2), new LadoArbol(2, 5),
-            new LadoArbol(5, 18), new LadoArbol(2, 6), new LadoArbol(6, 11),
-            new LadoArbol(2, 7), new LadoArbol(7, 17), new LadoArbol(1, 3),
-            new LadoArbol(3, 8), new LadoArbol(8, 12), new LadoArbol(8, 13),
-            new LadoArbol(1, 4), new LadoArbol(4, 9), new LadoArbol(9, 16),
-            new LadoArbol(4, 10), new LadoArbol(10, 14));
+      List<LadoArbol> ladosArbol = Arrays.asList(new LadoArbol(1, 2), new LadoArbol(2, 5),
+              new LadoArbol(5, 18), new LadoArbol(2, 6), new LadoArbol(6, 11),
+              new LadoArbol(2, 7), new LadoArbol(7, 17), new LadoArbol(1, 3),
+              new LadoArbol(3, 8), new LadoArbol(8, 12), new LadoArbol(8, 13),
+              new LadoArbol(1, 4), new LadoArbol(4, 9), new LadoArbol(9, 16),
+              new LadoArbol(4, 10), new LadoArbol(10, 14));
 
-    Arbol arbol = new Arbol(ladosArbol);
-
-    Arbol.mostrarArbol(arbol);
-
-    Ruta ruta1 = new Ruta(0, 0, 0);
-    Ruta ruta2 = new Ruta(0, 1, 0);
-    Ruta ruta3 = new Ruta(0, 2, 0);
-    Ruta ruta4 = new Ruta(1, 0, 0);
-    Ruta ruta5 = new Ruta(1, 0, 1);
-    Ruta ruta6 = new Ruta(2, 0, 0);
-    Ruta ruta7 = new Ruta(2, 1, 0);
+      Arbol arbol = new Arbol(ladosArbol);
 
 
 
-    float[] promedios = new float[7];
+      Ruta ruta1 = new Ruta(0, 0, 0);
+      Ruta ruta2 = new Ruta(0, 1, 0);
+      Ruta ruta3 = new Ruta(0, 2, 0);
+      Ruta ruta4 = new Ruta(1, 0, 0);
+      Ruta ruta5 = new Ruta(1, 0, 1);
+      Ruta ruta6 = new Ruta(2, 0, 0);
+      Ruta ruta7 = new Ruta(2, 1, 0);
 
-    float promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta1, 18, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 1 es: " + promedioActual +"\n");
-    promedios[0] = promedioActual;
+      System.out.println("\n\n*************** Entrada al sistema de cavernas ********************");
+      System.out.println("Mapeando cavernas... \n");
+      Arbol.mostrarArbol(arbol);
+      System.out.println("Calculando factores de ganancia de material precioso para cada ruta... \n");
+      float[] promedios = new float[7];
 
-    promedioActual = calcularPromedioRuta(ruta2, 11, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 2 es: " + promedioActual +"\n");
-    promedios[1] = promedioActual;
+      float promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta3, 17, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 3 es: " + promedioActual +"\n");
-    promedios[2] = promedioActual;
+      promedioActual = calcularPromedioRuta(ruta1, 18, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 1 es: " + promedioActual +"\n");
+      promedios[0] = promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta4, 12, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 4 es: " + promedioActual +"\n");
-    promedios[3] = promedioActual;
+      promedioActual = calcularPromedioRuta(ruta2, 11, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 2 es: " + promedioActual +"\n");
+      promedios[1] = promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta5, 13, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 5 es: " + promedioActual +"\n");
-    promedios[4] = promedioActual;
+      promedioActual = calcularPromedioRuta(ruta3, 17, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 3 es: " + promedioActual +"\n");
+      promedios[2] = promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta6, 16, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 6 es: " + promedioActual +"\n");
-    promedios[5] = promedioActual;
+      promedioActual = calcularPromedioRuta(ruta4, 12, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 4 es: " + promedioActual +"\n");
+      promedios[3] = promedioActual;
 
-    promedioActual = calcularPromedioRuta(ruta7, 14, arbol, rover);
-    System.out.println("El promedio de factores de ganancia para la ruta 7 es: " + promedioActual +"\n");
-    promedios[6] = promedioActual;
+      promedioActual = calcularPromedioRuta(ruta5, 13, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 5 es: " + promedioActual +"\n");
+      promedios[4] = promedioActual;
 
-    float mayorPromedio = 0;
-    int ruta = 0;
+      promedioActual = calcularPromedioRuta(ruta6, 16, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 6 es: " + promedioActual +"\n");
+      promedios[5] = promedioActual;
 
-    for (int k = 0; k < promedios.length; k++) {
-      if(promedios[k] > mayorPromedio){
-        mayorPromedio = promedios[k];
-        ruta = k+1;
+      promedioActual = calcularPromedioRuta(ruta7, 14, arbol, rover);
+      System.out.println("El promedio de factores de ganancia para la ruta 7 es: " + promedioActual +"\n");
+      promedios[6] = promedioActual;
+
+      float mayorPromedio = 0;
+      int ruta = 0;
+
+      for (int k = 0; k < promedios.length; k++) {
+        if(promedios[k] > mayorPromedio){
+          mayorPromedio = promedios[k];
+          ruta = k+1;
+        }
       }
+
+      System.out.println("El mayor promedio de los índices de ganancia para todas las rutas es el de la ruta "+ ruta + " con un promedio de factor de ganancia de "+mayorPromedio);
+
+    }else{
+      System.out.println("\nNo se puede hacer el recorrido por las cavernas");
     }
 
-    System.out.println("El mayor promedio de los índices de ganancia para todas las rutas es el de la ruta "+ ruta + " con un promedio de factor de ganancia de "+mayorPromedio);
   }
 
   static float calcularPromedioRuta(Ruta ruta, float factorGanancia, Arbol arbol, Rover rover) {
